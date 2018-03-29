@@ -1,0 +1,132 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @yuweiweiouo
+Sign out
+3
+0 2 ST2DE/wee1-homework-yf-ashu
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
+wee1-homework-yf-ashu/notebook/gitTutorial.md
+8fd4230  16 hours ago
+@yf-ashu yf-ashu git style change
+     
+138 lines (100 sloc)  3.19 KB
+Git 教學
+Git是什麼？ git是一種版本控制系統，同樣為版本控制的還有SVN 透過這樣的版本控制系統，可以清楚的記錄每個檔案是誰在什麼時候加進來、什麼時候被修改或刪除。
+
+什麼是版本控制？ 版本控制是一種軟體工程技巧，藉此能在軟體開發的過程中，確保由不同人所編輯的同一程式檔案都得到同步。
+
+好的版本控制系統有許多好處：
+
+中央協作中心的概念，能讓策劃開發人員一起工作。
+
+定義且公布最新更新的程式碼，除非程式碼被提交上去，否則不會被整合。
+
+維護專案的工作歷史記錄，將每一個特定版本內的具體內容建檔並編碼，甚至能列出差異。
+
+建立github專案
+如果在github上有專案的話可以先clone回來，這樣就可以直接remote了
+
+mkdir 資料夾名稱
+cd my_project
+git init
+git clone 你的專案
+好了之後
+
+git status //看狀態
+Untracked files的話是全新的檔案，尚未被提交過
+
+git add 你的檔案
+git add . //將所有有更動的檔案提交
+這邊記住一點！！！！！！ Git 在計算、產生物件的時候，是根據「檔案的內容」去做計算的，所以光是新增一個目錄，Git 是沒辦法處理它的。 空的目錄無法被提交！
+
+所以請讓你的目錄裡面有東西
+
+提交完之後再用git status看一次，你的狀態會變成Changes to be committed
+
+好了之後
+
+git commit -m "直接輸入訊息但不要打中文"
+git push
+就完成了
+
+其他指令
+.gitigore 忽略檔案
+.gitignore 作用範圍包含整個資料夾以及其所有子資料夾
+
+.gitignore 也可以存在多個資料夾中
+
+每個資料夾都可以另外定義 .gitignore 的內容
+
+git log 紀錄檔/git diff 比較
+git log//按q可跳出瀏覽
+git diff
+git diff是比對檔案與版本差異
+
+先從git log中得到id資訊(一長串數字的前五碼如e17f3)
+
+例如下圖
+
+
+
+再將id資訊填入作比對
+
+如git diff 5293b 91d30 會呈現下圖資訊(紅色為刪除，綠色為增加)
+
+
+
+git rm
+git rm
+將檔案刪除
+
+git mv
+git mv 檔案名 資料夾
+搬移檔案，這樣就不用add或rm檔案了
+
+git rebase
+git rebase
+將不同分支上的差異點合併成一個新的commit
+
+git config
+git config --global
+git config --global  user.name "zlargon"
+git config --global  user.email "zlargon@icloud.com"
+設定初始參數
+
+git config --list
+可查看設定的參數
+
+參考資料：
+
+https://zlargon.gitbooks.io/git-tutorial/content/
+https://gitbook.tw/
+https://git-scm.com/book/en/v2
+https://ithelp.ithome.com.tw/users/20004901/ironman/525
+Git問題
+Updates were rejected because a pushed branch tip is behind its remote
+github上的版本跟自己本機的版本不同時
+
+git push -u origin master -f 
+強制更新成你電腦上的分支
+
+rebase in progress;onto 代碼發生衝突時
+git status
+git add
+git rebase --continue
+c 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
+Press h to open a hovercard with more details.
