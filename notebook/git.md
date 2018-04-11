@@ -1,132 +1,81 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Explore
- @yuweiweiouo
-Sign out
-3
-0 2 ST2DE/wee1-homework-yf-ashu
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
-wee1-homework-yf-ashu/notebook/gitTutorial.md
-8fd4230  16 hours ago
-@yf-ashu yf-ashu git style change
-     
-138 lines (100 sloc)  3.19 KB
-Git 教學
-Git是什麼？ git是一種版本控制系統，同樣為版本控制的還有SVN 透過這樣的版本控制系統，可以清楚的記錄每個檔案是誰在什麼時候加進來、什麼時候被修改或刪除。
+# git 常用指令
 
-什麼是版本控制？ 版本控制是一種軟體工程技巧，藉此能在軟體開發的過程中，確保由不同人所編輯的同一程式檔案都得到同步。
+團隊常常需要切換或合併 branch，底下是常用 git 指令
 
-好的版本控制系統有許多好處：
+## git pull
 
-中央協作中心的概念，能讓策劃開發人員一起工作。
+拉最新的 `master` 程式碼到目前 branch。不管是在任何 branch 都是執行底下指令
 
-定義且公布最新更新的程式碼，除非程式碼被提交上去，否則不會被整合。
+```
+$ git pull --rebase origin master
+```
 
-維護專案的工作歷史記錄，將每一個特定版本內的具體內容建檔並編碼，甚至能列出差異。
+## git reset
 
-建立github專案
-如果在github上有專案的話可以先clone回來，這樣就可以直接remote了
+發送 Pull Request 後，又需要修改目前 Branch 程式，請善用 git reset 來回到前一次 commit 紀錄
 
-mkdir 資料夾名稱
-cd my_project
-git init
-git clone 你的專案
-好了之後
+```
+$ git reset --soft HEAD^
+```
 
-git status //看狀態
-Untracked files的話是全新的檔案，尚未被提交過
+`HEAD^` 代表回到上一個 commit，如果要回到多個 commit 請用 `HEAD~4`，其中 `4` 請換成您要的數字
 
-git add 你的檔案
-git add . //將所有有更動的檔案提交
-這邊記住一點！！！！！！ Git 在計算、產生物件的時候，是根據「檔案的內容」去做計算的，所以光是新增一個目錄，Git 是沒辦法處理它的。 空的目錄無法被提交！
+## git branch
 
-所以請讓你的目錄裡面有東西
+用來看目前有哪些 branch 或者是強制刪除壞掉的 branch
 
-提交完之後再用git status看一次，你的狀態會變成Changes to be committed
+```
+$ git bracnch -D xxxx
+```
 
-好了之後
+`-D` 是強制刪除
 
-git commit -m "直接輸入訊息但不要打中文"
-git push
-就完成了
+## git checkout
 
-其他指令
-.gitigore 忽略檔案
-.gitignore 作用範圍包含整個資料夾以及其所有子資料夾
+用來切換 branch
 
-.gitignore 也可以存在多個資料夾中
+### 切換到遠端 branch
 
-每個資料夾都可以另外定義 .gitignore 的內容
+要 review 別人的 pull request，請使用底下指令
 
-git log 紀錄檔/git diff 比較
-git log//按q可跳出瀏覽
-git diff
-git diff是比對檔案與版本差異
+```
+# 讀取最新的 origin 程式碼
+$ git fetch origin
+$ git checkout -b test origin/test
+```
 
-先從git log中得到id資訊(一長串數字的前五碼如e17f3)
+這樣就可以切換到遠端 test branch 繼續操作
 
-例如下圖
+### 單純切換 local branch
 
+```
+$ git checkout master
+```
 
+## git rebase
 
-再將id資訊填入作比對
+在 PR 內合併多個 commit 內容，這是用在 Code Review 完成後，原作者新增多個 commit，需要將全部 commit 合成一個 
 
-如git diff 5293b 91d30 會呈現下圖資訊(紅色為刪除，綠色為增加)
+```
+$ git rebase -i commit_id
+```
 
+底下是常用的狀況
 
+```
+f, fixup = like "squash", but discard this commit's log message
+s, squash = use commit, but meld into previous commit
+```
 
-git rm
-git rm
-將檔案刪除
+把要 squash 的 commit id 前面都改成 `f`，然後 `:wq` 存檔。遇到衝突解決後，可以下
 
-git mv
-git mv 檔案名 資料夾
-搬移檔案，這樣就不用add或rm檔案了
+```
+$ git add xxxx
+$ git rebase --continue
+```
 
-git rebase
-git rebase
-將不同分支上的差異點合併成一個新的commit
+要跳出 git rebase 的話，請下
 
-git config
-git config --global
-git config --global  user.name "zlargon"
-git config --global  user.email "zlargon@icloud.com"
-設定初始參數
-
-git config --list
-可查看設定的參數
-
-參考資料：
-
-https://zlargon.gitbooks.io/git-tutorial/content/
-https://gitbook.tw/
-https://git-scm.com/book/en/v2
-https://ithelp.ithome.com.tw/users/20004901/ironman/525
-Git問題
-Updates were rejected because a pushed branch tip is behind its remote
-github上的版本跟自己本機的版本不同時
-
-git push -u origin master -f 
-強制更新成你電腦上的分支
-
-rebase in progress;onto 代碼發生衝突時
-git status
-git add
-git rebase --continue
-c 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About
-Press h to open a hovercard with more details.
+```
+$ git rebase --abort
+```
